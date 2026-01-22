@@ -4,6 +4,7 @@ import 'package:grocery/core/common/shared_widget.dart/spacing.dart';
 import 'package:grocery/core/utils/app_assets.dart';
 import 'package:grocery/core/utils/app_colors.dart';
 import 'package:grocery/core/utils/styles.dart';
+import 'package:grocery/features/auth/presentation/screens/register_screen.dart';
 import 'package:grocery/features/on_boarding/presentation/widgets/login_and_register_button.dart';
 import 'package:grocery/features/on_boarding/presentation/widgets/scroll_indicator.dart';
 
@@ -44,7 +45,8 @@ class OnBoardingDeliveryScreen extends StatelessWidget {
               ScrollIndicator(index: index),
               verticalSpacing(40),
               LoginAndRegisterButton(
-                onPressed: () {},
+                onPressed: () =>
+                    Navigator.push(context, RegisterScreen.route()),
                 text: 'Create an account',
               ),
               verticalSpacing(18),

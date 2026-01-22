@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:grocery/features/on_boarding/presentation/on_boarding_first_screen.dart';
+import 'package:grocery/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:grocery/features/on_boarding/presentation/screens/on_boarding_first_screen.dart';
+import 'package:grocery/init_dependencies.main.dart';
 
-void main() {
+void main() async {
+  await initDependencies();
+
   runApp(const MyApp());
 }
 
@@ -17,9 +22,12 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
 
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: const OnBoardingFirstScreen(),
+      child: BlocProvider(
+        create: (context) => serviceLocator<AuthBloc>(),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: const OnBoardingFirstScreen(),
+        ),
       ),
     );
   }

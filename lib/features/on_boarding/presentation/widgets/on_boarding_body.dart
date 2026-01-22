@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:grocery/core/common/shared_widget.dart/custom_button.dart';
+import 'package:grocery/core/common/shared_widget.dart/custom_shared_button.dart';
 import 'package:grocery/core/common/shared_widget.dart/spacing.dart';
 import 'package:grocery/core/utils/app_assets.dart';
 import 'package:grocery/core/utils/styles.dart';
-import 'package:grocery/features/on_boarding/presentation/on_boarding_second_screen.dart';
+import 'package:grocery/features/on_boarding/presentation/screens/on_boarding_second_screen.dart';
 import 'package:grocery/features/on_boarding/presentation/widgets/scroll_indicator.dart';
 
 class OnBoardingBody extends StatelessWidget {
@@ -34,7 +34,7 @@ class OnBoardingBody extends StatelessWidget {
         verticalSpacing(24),
         ScrollIndicator(index: index),
         verticalSpacing(40),
-        CustomButton(
+        CustomSharedButton(
           text: 'NEXT',
           onPressed: () {
             Navigator.push(context, OnBoardingSecondScreen.route());

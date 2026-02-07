@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:grocery/core/common/shared_widget.dart/custom_shared_button.dart';
 import 'package:grocery/core/common/shared_widget.dart/spacing.dart';
+import 'package:grocery/core/utils/app_routes.dart';
 import 'package:grocery/core/utils/styles.dart';
 import 'package:grocery/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:grocery/features/auth/presentation/widgets/custom_rich_text.dart';
@@ -19,22 +20,20 @@ class RegisterBottomSheetBody extends StatefulWidget {
 }
 
 class _RegisterBottomSheetBodyState extends State<RegisterBottomSheetBody> {
-  String? name;
-  String? email;
-  String? password;
-  String? fullName;
-  // final _nameController = TextEditingController();
-  // final _emailController = TextEditingController();
-  // final _passwordController = TextEditingController();
+  final _firstNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  // @override
-  // dispose() {
-  //   _nameController.dispose();
-  //   _emailController.dispose();
-  //   _passwordController.dispose();
-  //   super.dispose();
-  // }
+  @override
+  dispose() {
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +54,7 @@ class _RegisterBottomSheetBodyState extends State<RegisterBottomSheetBody> {
                   style: Styles.semiBold20BlackPoppins,
                 ),
                 IconButton(
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: () => AppRoutes.router.pop(),
                   icon: Icon(Icons.cancel),
                 ),
               ],
@@ -63,33 +62,21 @@ class _RegisterBottomSheetBodyState extends State<RegisterBottomSheetBody> {
             verticalSpacing(40),
             Row(
               children: [
-                NameTextFormFeild(
-                  onchange: (value) {
-                    name = value;
-                  },
-                ),
+                NameTextFormFeild(controller: _firstNameController),
                 horizontalSpacing(18),
-                NameTextFormFeild(
-                  onchange: (value) {
-                    fullName = "$name $value";
-                  },
-                ),
+                NameTextFormFeild(controller: _lastNameController),
               ],
             ),
             verticalSpacing(16),
             EmailAndPasswordTextFormFeild(
+              controller: _emailController,
               hintText: "Email",
-              onChange: (value) {
-                email = value;
-              },
             ),
             verticalSpacing(13),
             EmailAndPasswordTextFormFeild(
+              controller: _passwordController,
               hintText: "Password",
               isObscure: true,
-              onChange: (value) {
-                password = value;
-              },
             ),
             verticalSpacing(10),
             CustomRichText(),
@@ -104,9 +91,10 @@ class _RegisterBottomSheetBodyState extends State<RegisterBottomSheetBody> {
                 if (_formKey.currentState!.validate()) {
                   context.read<AuthBloc>().add(
                     RegisterUserEvent(
-                      name: fullName!,
-                      email: email!,
-                      password: password!,
+                      name:
+                          "${_firstNameController.text.trim()} ${_lastNameController.text.trim()}",
+                      email: _emailController.text.trim(),
+                      password: _passwordController.text.trim(),
                     ),
                   );
                 }
@@ -118,34 +106,3 @@ class _RegisterBottomSheetBodyState extends State<RegisterBottomSheetBody> {
     );
   }
 }
-
-// Future<dynamic> showCongratulationDialog(BuildContext context) {
-//     return showDialog(
-//       context: context,
-//       barrierColor: Colors.transparent,
-//       useSafeArea: true,
-//       builder: (context) {
-//         return Stack(
-//           children: [
-//             BackdropFilter(
-//               filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
-//               child: Opacity(
-//                 opacity: 0.25,
-//                 child: Container(
-//                   decoration: BoxDecoration(color: Colors.black),
-//                 ),
-//               ),
-//             ),
-
-//             Center(
-//               child: Dialog(
-//                 elevation: 4,
-//                 backgroundColor: Colors.transparent,
-//                 insetPadding: EdgeInsets.zero,
-//                 child: Congratulation(),
-//               ),
-//             ),
-//           ],
-//         );
-//       },
-//     );

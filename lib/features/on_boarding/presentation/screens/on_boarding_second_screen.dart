@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:grocery/core/common/shared_widget.dart/custom_shared_button.dart';
 import 'package:grocery/core/common/shared_widget.dart/spacing.dart';
 import 'package:grocery/core/utils/app_assets.dart';
 import 'package:grocery/core/utils/app_colors.dart';
+import 'package:grocery/core/utils/app_routes.dart';
 import 'package:grocery/core/utils/styles.dart';
-import 'package:grocery/features/on_boarding/presentation/screens/on_boarding_delivery_screen.dart';
 import 'package:grocery/features/on_boarding/presentation/widgets/scroll_indicator.dart';
 
 class OnBoardingSecondScreen extends StatelessWidget {
   const OnBoardingSecondScreen({super.key});
   final int index = 1;
-  static dynamic route() =>
-      MaterialPageRoute(builder: (context) => const OnBoardingSecondScreen());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => context.pop(),
           icon: Icon(Icons.arrow_back, color: AppColors.orange, size: 24.sp),
         ),
         backgroundColor: AppColors.lightGray,
@@ -30,7 +30,7 @@ class OnBoardingSecondScreen extends StatelessWidget {
           children: [
             verticalSpacing(50),
             Image.asset(
-              AppAssets.onBoardingGroceryImage,
+              AppImagesAssets.onBoardingGroceryImage,
               height: 360.h,
               width: MediaQuery.sizeOf(context).width,
             ),
@@ -55,7 +55,7 @@ class OnBoardingSecondScreen extends StatelessWidget {
             CustomSharedButton(
               text: 'NEXT',
               onPressed: () {
-                Navigator.push(context, OnBoardingDeliveryScreen.route());
+                context.go(AppRoutes.onBoardingDeliveryScreen);
               },
             ),
             Expanded(child: SizedBox()),

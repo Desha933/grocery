@@ -11,8 +11,7 @@ import 'package:grocery/features/auth/presentation/widgets/image_scaffold_back_g
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
-  static dynamic route() =>
-      MaterialPageRoute(builder: (context) => RegisterScreen());
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthBloc, AuthState>(
@@ -21,7 +20,6 @@ class RegisterScreen extends StatelessWidget {
           showSnackBar(context, state.errMessage);
         }
         if (state is RegisterAuthSuccess) {
-          print(state.user.email);
           showCongratulationOverlay(context, state.user.email);
         }
       },
@@ -39,7 +37,7 @@ class RegisterScreen extends StatelessWidget {
 
           body: SafeArea(
             child: ImageScaffoldBackGround(
-              image: AppAssets.registerBackGroundImage,
+              image: AppImagesAssets.registerBackGroundImage,
             ),
           ),
         );

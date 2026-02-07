@@ -12,6 +12,7 @@ class CustomSharedButton extends StatelessWidget {
     this.width,
     this.height,
     this.borderRadius,
+    this.color,
   });
   final String text;
   final void Function()? onPressed;
@@ -19,6 +20,7 @@ class CustomSharedButton extends StatelessWidget {
   final double? width;
   final double? height;
   final double? borderRadius;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class CustomSharedButton extends StatelessWidget {
         width: width ?? 318.w,
         height: height ?? 60.h,
         decoration: BoxDecoration(
-          color: AppColors.lightYellow,
+          color: color ?? AppColors.lightYellow,
           borderRadius: BorderRadius.circular(borderRadius ?? 32.r),
         ),
         child: Center(

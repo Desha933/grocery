@@ -22,11 +22,23 @@ abstract class Styles {
     fontWeight: AppFontWeight.bold,
     color: AppColors.black,
   );
+  static TextStyle bold14WhitePoppins = TextStyle(
+    fontFamily: GoogleFonts.poppins().fontFamily,
+    fontSize: 14.sp,
+    fontWeight: AppFontWeight.bold,
+    color: AppColors.white,
+  );
   static TextStyle semiBold20BlackPoppins = TextStyle(
     fontFamily: GoogleFonts.poppins().fontFamily,
     fontSize: 20.sp,
     fontWeight: AppFontWeight.semiBold,
     color: AppColors.black,
+  );
+  static TextStyle medium18WhitePoppins = TextStyle(
+    fontFamily: GoogleFonts.poppins().fontFamily,
+    fontSize: 18.sp,
+    fontWeight: AppFontWeight.medium,
+    color: AppColors.white,
   );
   static TextStyle light14black = TextStyle(
     fontSize: 14.sp,

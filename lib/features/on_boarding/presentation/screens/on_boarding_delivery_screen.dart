@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:grocery/core/common/shared_widget.dart/spacing.dart';
 import 'package:grocery/core/utils/app_assets.dart';
 import 'package:grocery/core/utils/app_colors.dart';
+import 'package:grocery/core/utils/app_routes.dart';
 import 'package:grocery/core/utils/styles.dart';
-import 'package:grocery/features/auth/presentation/screens/register_screen.dart';
 import 'package:grocery/features/on_boarding/presentation/widgets/login_and_register_button.dart';
 import 'package:grocery/features/on_boarding/presentation/widgets/scroll_indicator.dart';
 
 class OnBoardingDeliveryScreen extends StatelessWidget {
   const OnBoardingDeliveryScreen({super.key});
   final int index = 2;
-  static dynamic route() =>
-      MaterialPageRoute(builder: (context) => OnBoardingDeliveryScreen());
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +24,7 @@ class OnBoardingDeliveryScreen extends StatelessWidget {
             children: [
               Expanded(child: SizedBox()),
               Image.asset(
-                AppAssets.onBoardingDeliveryImage,
+                AppImagesAssets.onBoardingDeliveryImage,
                 height: 360.h,
                 width: MediaQuery.sizeOf(context).width,
               ),
@@ -46,11 +45,16 @@ class OnBoardingDeliveryScreen extends StatelessWidget {
               verticalSpacing(40),
               LoginAndRegisterButton(
                 onPressed: () =>
-                    Navigator.push(context, RegisterScreen.route()),
+                    AppRoutes.router.push(AppRoutes.registerScreen),
                 text: 'Create an account',
               ),
               verticalSpacing(18),
-              LoginAndRegisterButton(onPressed: () {}, text: 'Login'),
+              LoginAndRegisterButton(
+                onPressed: () {
+                  AppRoutes.router.push(AppRoutes.loginScreen);
+                },
+                text: 'Login',
+              ),
               verticalSpacing(18),
             ],
           ),

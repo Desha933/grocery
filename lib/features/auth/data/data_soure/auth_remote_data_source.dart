@@ -53,7 +53,12 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         throw ServerException('User not found');
       }
 
-      return UserModel.fromJson(response.user!.toJson());
+      return UserModel(
+        id: response.user!.id,
+        name: response.user!.userMetadata?['name'] ?? "NO Name",
+        email: email,
+        password: password,
+      );
     } on Exception catch (e) {
       throw ServerException(e.toString());
     }

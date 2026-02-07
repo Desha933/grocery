@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grocery/features/auth/presentation/screens/login_screen.dart';
+import 'package:grocery/core/utils/app_routes.dart';
 import 'package:grocery/features/auth/presentation/widgets/congratulation_dialog.dart';
 
 void showCongratulationOverlay(BuildContext context, String email) {
@@ -11,7 +11,7 @@ void showCongratulationOverlay(BuildContext context, String email) {
         return CongratulationDialog(
           callBack: () {
             overlayEntry.remove();
-            Navigator.push(context, LoginScreen.route(email));
+            AppRoutes.router.push(AppRoutes.loginScreen, extra: email);
           },
         );
       },

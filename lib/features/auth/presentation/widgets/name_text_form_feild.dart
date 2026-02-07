@@ -3,23 +3,25 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grocery/core/utils/app_colors.dart';
 import 'package:grocery/core/utils/styles.dart';
 
-class NameTextFormFeild extends StatefulWidget {
-  const NameTextFormFeild({super.key, this.onchange});
+class NameTextFormFeild extends StatelessWidget {
+  const NameTextFormFeild({super.key, this.controller});
 
-  final void Function(String?)? onchange;
+  final TextEditingController? controller;
 
-  @override
-  State<NameTextFormFeild> createState() => _NameTextFormFeildState();
-}
-
-class _NameTextFormFeildState extends State<NameTextFormFeild> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: 150.w,
       height: 59.h,
       child: TextFormField(
-        onChanged: widget.onchange,
+        controller: controller,
+
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return "Please enter your name";
+          }
+          return null;
+        },
         style: Styles.regular15BlackDMSans,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.only(left: 16.w),

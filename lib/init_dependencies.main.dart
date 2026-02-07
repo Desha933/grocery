@@ -8,6 +8,12 @@ import 'package:grocery/features/auth/domain/repos/auth_repo.dart';
 import 'package:grocery/features/auth/domain/use_case/login_user_use_case.dart';
 import 'package:grocery/features/auth/domain/use_case/register_user_use_case.dart';
 import 'package:grocery/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:grocery/features/home/data/data_source/home_remote_data_sourec.dart';
+import 'package:grocery/features/home/data/repos_impl/home_repo_impl.dart';
+import 'package:grocery/features/home/domain/repos/home_repos.dart';
+import 'package:grocery/features/home/domain/use_case/get_all_products_use_case.dart';
+import 'package:grocery/features/home/domain/use_case/post_product_use_case.dart';
+import 'package:grocery/features/home/presentation/bloc/product_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 final serviceLocator = GetIt.instance;
@@ -23,6 +29,7 @@ Future<void> initDependencies() async {
   );
   serviceLocator.registerLazySingleton<AppUserCubit>(() => AppUserCubit());
   _initAuth();
+  _initProduct();
 }
 
 void _initAuth() {
@@ -45,6 +52,30 @@ void _initAuth() {
       () => AuthBloc(
         registerUserUseCase: serviceLocator(),
         loginUserUseCase: serviceLocator(),
+      ),
+    );
+}
+
+void _initProduct() {
+  // data source
+  serviceLocator
+    ..registerFactory<HomeRemoteDataSource>(
+      () => HomeRemoteDataSourceImpl(serviceLocator()),
+    )
+    // repo
+    ..registerFactory<HomeRepos>(() => HomeRepoImpl(serviceLocator()))
+    // use case
+    ..registerFactory<PostProductUseCase>(
+      () => PostProductUseCase(serviceLocator()),
+    )
+    ..registerFactory<GetAllProductsUseCase>(
+      () => GetAllProductsUseCase(serviceLocator()),
+    )
+    // bloc
+    ..registerLazySingleton<ProductBloc>(
+      () => ProductBloc(
+        postProductUseCase: serviceLocator(),
+        getAllProductsUseCase: serviceLocator(),
       ),
     );
 }

@@ -12,12 +12,14 @@ class EmailAndPasswordTextFormFeild extends StatefulWidget {
     this.isObscure = false,
     required this.hintText,
     this.onChange,
+    this.controller,
   });
   final Color? color;
   final double? height;
   final String hintText;
   final bool isObscure;
   final void Function(String?)? onChange;
+  final TextEditingController? controller;
   @override
   State<EmailAndPasswordTextFormFeild> createState() =>
       _EmailAndPasswordTextFormFeildState();
@@ -38,6 +40,13 @@ class _EmailAndPasswordTextFormFeildState
       width: 319.w,
       height: widget.height ?? 59.h,
       child: TextFormField(
+        controller: widget.controller,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please enter your ${widget.hintText}';
+          }
+          return null;
+        },
         onChanged: widget.onChange,
         obscuringCharacter: '●',
         obscureText: _isObscure,
@@ -60,7 +69,7 @@ class _EmailAndPasswordTextFormFeildState
                   },
                 )
               : SizedBox.shrink(),
-          contentPadding: EdgeInsets.only(left: 22.w, top: 20.h, bottom: 20.h),
+          // contentPadding: EdgeInsets.only(left: 22.w, top: 20.h, bottom: 20.h),
           hintText: widget.hintText,
           hintStyle: Styles.regular16Gray,
           filled: true,
@@ -68,7 +77,8 @@ class _EmailAndPasswordTextFormFeildState
 
           enabledBorder: _border(widget.color),
 
-          focusedBorder: _border(widget.color),
+          focusedBorder: _border(AppColors.orange),
+          errorBorder: _border(AppColors.red),
 
           border: _border(),
         ),

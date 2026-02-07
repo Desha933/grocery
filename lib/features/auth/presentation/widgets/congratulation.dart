@@ -5,7 +5,6 @@ import 'package:grocery/core/common/shared_widget.dart/spacing.dart';
 import 'package:grocery/core/utils/app_assets.dart';
 import 'package:grocery/core/utils/app_colors.dart';
 import 'package:grocery/core/utils/styles.dart';
-import 'package:grocery/features/auth/presentation/screens/login_screen.dart';
 
 class Congratulation extends StatelessWidget {
   const Congratulation({super.key, this.callBack});
@@ -30,7 +29,7 @@ class Congratulation extends StatelessWidget {
       child: Column(
         children: [
           Image.asset(
-            AppAssets.congratulationImage,
+            AppImagesAssets.congratulationImage,
             height: 337.h,
             width: 262.w,
           ),
@@ -44,9 +43,6 @@ class Congratulation extends StatelessWidget {
               fontSize: 12.5.sp,
             ),
             onPressed: callBack,
-
-            // callBack;
-            // Navigator.push(context, LoginScreen.route());
           ),
           verticalSpacing(63),
         ],
